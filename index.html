@@ -3,57 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Working Video Text Remover Pro 🎬</title>
+    <title>Video Text Remover Pro - 1 Click Solution 🎬</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             min-height: 100vh;
             padding: 20px;
             color: white;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
+        /* Header */
         .header {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .header h1 {
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2.5em;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr 300px;
-            gap: 20px;
-        }
-
-        /* Controls Panel */
-        .controls {
-            background: rgba(0,0,0,0.7);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             padding: 25px;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-            height: fit-content;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo h1 {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 28px;
+        }
+
+        .badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr 280px;
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .control-group {
@@ -63,18 +80,28 @@
         .control-group label {
             display: block;
             margin-bottom: 10px;
-            color: #00d2ff;
+            color: #4ecdc4;
             font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         select, input[type="range"] {
             width: 100%;
-            padding: 12px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             color: white;
+            font-size: 14px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:hover, input[type="range"]:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #4ecdc4;
         }
 
         select option {
@@ -82,25 +109,177 @@
             color: white;
         }
 
-        .btn {
-            width: 100%;
+        /* Selection Area Box */
+        .selection-box {
+            background: rgba(78, 205, 196, 0.1);
+            border: 2px dashed #4ecdc4;
+            border-radius: 12px;
             padding: 15px;
-            border: none;
-            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .selection-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffb142;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #ffb142;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
             font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        /* Video Area */
+        .video-area {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .upload-area {
+            padding: 60px 30px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 15px;
+        }
+
+        .upload-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            display: none;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        #drawCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        /* Selection Instructions */
+        .selection-instructions {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #4ecdc4;
+            pointer-events: none;
+        }
+
+        .arrow-animation {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
         }
 
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,210,255,0.3);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: white;
         }
 
         .btn:disabled {
@@ -108,393 +287,515 @@
             cursor: not-allowed;
         }
 
-        /* Video Area */
-        .video-area {
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        video, canvas {
-            width: 100%;
-            border-radius: 15px;
-        }
-
-        #videoCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        #drawCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            cursor: crosshair;
-            pointer-events: auto;
-        }
-
-        /* Progress Bar */
+        /* Progress */
         .progress-container {
             margin-top: 20px;
             display: none;
         }
 
         .progress-bar {
-            height: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 5px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            background: linear-gradient(45deg, #00b894, #00cec9);
             width: 0%;
             transition: width 0.3s;
-        }
-
-        /* Upload Area */
-        .upload-area {
-            border: 2px dashed #00d2ff;
-            padding: 40px;
-            text-align: center;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .upload-area:hover {
-            background: rgba(0,210,255,0.1);
         }
 
         /* Download Section */
         .download-section {
             margin-top: 20px;
             padding: 20px;
-            background: rgba(0,210,255,0.1);
-            border-radius: 15px;
+            background: rgba(0, 184, 148, 0.2);
+            border-radius: 12px;
             display: none;
         }
 
-        /* Frame Preview */
-        .frame-preview {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .frame-thumb {
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .frame-thumb canvas {
-            width: 100%;
-            height: auto;
-        }
-
-        /* Stats */
-        .stats {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            padding: 12px;
             border-radius: 10px;
             margin-top: 15px;
+            display: none;
         }
 
-        .stat-item {
+        /* Quick Guide */
+        .guide-step {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            color: #aaa;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .guide-step.active {
+            background: rgba(78, 205, 196, 0.2);
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <h1>🎬 WORKING Video Text Remover Pro</h1>
-            <p style="color: #aaa; margin-top: 10px;">AI-Powered | Real Text Removal | 5 Min Max</p>
+            <div class="logo">
+                <h1>🎬 Video Text Remover Pro</h1>
+                <p style="color: #aaa; margin-top: 5px;">AI-Powered | 1 Click Solution | 5 Min Max</p>
+            </div>
+            <div class="badge">
+                🔥 LIVE & WORKING
+            </div>
         </div>
 
+        <!-- Main Grid -->
         <div class="main-grid">
             <!-- Left Panel - Controls -->
-            <div class="controls">
-                <h3 style="margin-bottom: 20px; color: #00d2ff;">⚙️ Controls</h3>
+            <div class="card control-panel">
+                <h2 style="margin-bottom: 25px; color: #4ecdc4; font-size: 22px;">⚙️ Controls</h2>
                 
+                <!-- Removal Method -->
                 <div class="control-group">
-                    <label>🎯 Removal Method</label>
+                    <label>🎯 REMOVAL METHOD</label>
                     <select id="method">
+                        <option value="blur" selected>🌫️ Professional Blur (Recommended)</option>
                         <option value="inpaint">🔮 AI Smart Inpaint</option>
-                        <option value="blur">🌫️ Professional Blur</option>
                         <option value="pixelate">🧩 Pixelate</option>
                         <option value="solid">⬛ Solid Cover</option>
                     </select>
                 </div>
 
-                <div id="manualControls">
-                    <div class="control-group">
-                        <label>📐 Selection Area</label>
-                        <p style="color: #00d2ff; font-size: 12px; margin-bottom: 5px;">Draw on video to select text area</p>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label>⚡ Intensity: <span id="intensityValue">70%</span></label>
-                        <input type="range" id="intensity" min="1" max="100" value="70">
+                <!-- Selection Area Status -->
+                <div class="control-group">
+                    <label>📌 TEXT SELECTION</label>
+                    <div class="selection-box">
+                        <div class="selection-status" id="selectionStatus">
+                            <span class="status-dot"></span>
+                            <span id="statusText">Draw box on video to select text area</span>
+                        </div>
+                        <div style="margin-top: 15px; font-size: 13px; color: #aaa;" id="selectionCoordinates">
+                            No area selected
+                        </div>
                     </div>
                 </div>
 
+                <!-- Intensity -->
                 <div class="control-group">
-                    <label>🎚️ Quality</label>
+                    <label style="display: flex; justify-content: space-between;">
+                        <span>⚡ INTENSITY</span>
+                        <span style="color: #4ecdc4;" id="intensityValue">100%</span>
+                    </label>
+                    <input type="range" id="intensity" min="1" max="100" value="80">
+                </div>
+
+                <!-- Quality -->
+                <div class="control-group">
+                    <label>🎚️ OUTPUT QUALITY</label>
                     <select id="quality">
-                        <option value="0.9">💎 Ultra (4K)</option>
-                        <option value="0.7" selected>✨ High (1080p)</option>
-                        <option value="0.5">📱 Medium (720p)</option>
-                        <option value="0.3">💨 Fast (480p)</option>
+                        <option value="1.0">💎 Ultra (4K) - Best Quality</option>
+                        <option value="0.8" selected>✨ High (1080p) - Recommended</option>
+                        <option value="0.6">📱 Medium (720p) - Balanced</option>
+                        <option value="0.4">💨 Fast (480p) - Quick Processing</option>
                     </select>
                 </div>
 
-                <div class="stats">
+                <!-- Video Stats -->
+                <div class="stats-grid">
                     <div class="stat-item">
-                        <span>Video Duration:</span>
-                        <span id="durationDisplay">00:00</span>
+                        <div class="stat-label">Duration</div>
+                        <div class="stat-value" id="durationDisplay">00:00</div>
                     </div>
                     <div class="stat-item">
-                        <span>Selected Area:</span>
-                        <span id="areaDisplay">None</span>
+                        <div class="stat-label">Selected Area</div>
+                        <div class="stat-value" id="areaDisplay">None</div>
                     </div>
                     <div class="stat-item">
-                        <span>Frames:</span>
-                        <span id="framesDisplay">0</span>
+                        <div class="stat-label">Frames</div>
+                        <div class="stat-value" id="framesDisplay">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Status</div>
+                        <div class="stat-value" id="statusDisplay">⏳ Idle</div>
                     </div>
                 </div>
 
+                <!-- Progress Bar -->
                 <div class="progress-container" id="progressContainer">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span>Processing:</span>
-                        <span id="progressPercent">0%</span>
+                        <span>Processing Video:</span>
+                        <span style="color: #4ecdc4;" id="progressPercent">0%</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="progressFill"></div>
                     </div>
-                    <p id="progressStatus" style="margin-top: 10px; color: #00d2ff;"></p>
+                    <p id="progressStatus" style="margin-top: 12px; color: #4ecdc4; font-size: 14px;"></p>
                 </div>
 
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage">
+                    ❌ Please select text area first! Draw a box on the video.
+                </div>
+
+                <!-- Process Button -->
                 <button class="btn btn-primary" id="processBtn" onclick="processVideo()" disabled>
-                    🚀 START PROCESSING
+                    <span>🚀</span> START PROCESSING
                 </button>
 
+                <!-- Download Section -->
                 <div id="downloadSection" class="download-section">
-                    <h4 style="color: #00d2ff; margin-bottom: 15px;">✅ Processing Complete!</h4>
-                    <button class="btn btn-primary" onclick="downloadVideo()" style="background: linear-gradient(45deg, #00b09b, #96c93d);">
-                        📥 Download Pro Video
+                    <h3 style="color: #00b894; margin-bottom: 15px;">✅ Ready for Download!</h3>
+                    <button class="btn btn-success" onclick="downloadVideo()">
+                        <span>📥</span> Download Clean Video
                     </button>
                 </div>
             </div>
 
             <!-- Center - Video Player -->
-            <div class="video-area">
+            <div class="card video-area">
                 <!-- Upload Area -->
                 <div id="uploadArea" class="upload-area" onclick="document.getElementById('videoInput').click()">
-                    <div style="font-size: 50px; margin-bottom: 15px;">🎬</div>
-                    <h3 style="margin-bottom: 10px;">Drop Video Here</h3>
-                    <p style="color: #aaa;">MP4, MOV, AVI (Max 5 Minutes)</p>
+                    <div class="upload-icon">🎬</div>
+                    <div class="upload-text">Drop your video here</div>
+                    <div class="upload-hint">Click to browse • MP4, MOV, AVI • Max 5 minutes</div>
                     <input type="file" id="videoInput" accept="video/*" style="display: none;" onchange="loadVideo(this)">
                 </div>
 
-                <!-- Video Player (Hidden initially) -->
+                <!-- Video Player -->
                 <div id="videoPlayer" style="display: none;">
                     <div class="video-container">
                         <video id="video" controls>
                             <source id="videoSource" src="">
                         </video>
                         <canvas id="drawCanvas"></canvas>
-                        <canvas id="videoCanvas"></canvas>
+                        
+                        <!-- Selection Instructions -->
+                        <div class="selection-instructions" id="selectionInstructions">
+                            <span style="background: #4ecdc4; color: black; padding: 2px 10px; border-radius: 20px; font-weight: bold;">NEW</span>
+                            <span>👇 Draw box around text area</span>
+                            <span class="arrow-animation">→</span>
+                        </div>
                     </div>
                     
-                    <div style="margin-top: 20px;">
-                        <input type="range" id="frameSlider" min="0" max="100" value="0" style="width: 100%;" oninput="seekVideo(this.value)">
-                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <!-- Timeline -->
+                    <div class="timeline">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span id="currentTime">00:00</span>
                             <span id="totalTime">00:00</span>
                         </div>
+                        <input type="range" id="frameSlider" min="0" max="100" value="0" style="width: 100%;" oninput="seekVideo(this.value)">
                     </div>
 
-                    <div class="frame-preview" id="framePreview"></div>
+                    <!-- Quick Tips -->
+                    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span style="background: rgba(78, 205, 196, 0.2); padding: 6px 12px; border-radius: 50px; font-size: 12px;">
+                            ✨ Click & drag to draw box
+                        </span>
+                        <span style="background: rgba(78, 205, 196, 0.2); padding: 6px 12px; border-radius: 50px; font-size: 12px;">
+                            🎯 Double click to clear
+                        </span>
+                    </div>
                 </div>
             </div>
 
             <!-- Right Panel - Guide -->
-            <div class="controls">
-                <h3 style="margin-bottom: 20px; color: #00d2ff;">📋 Quick Guide</h3>
+            <div class="card">
+                <h2 style="margin-bottom: 25px; color: #4ecdc4; font-size: 22px;">📋 Quick Guide</h2>
                 
-                <div style="margin-bottom: 30px;">
-                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">1</div>
-                        <div>Upload your video</div>
+                <!-- Step by Step Guide -->
+                <div id="guideStep1" class="guide-step active">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>Upload Video</strong>
+                        <p style="color: #aaa; font-size: 12px; margin-top: 3px;">MP4, MOV, AVI (Max 5 min)</p>
                     </div>
-                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">2</div>
-                        <div>Draw box on text area</div>
+                </div>
+                
+                <div id="guideStep2" class="guide-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>Draw Selection Box</strong>
+                        <p style="color: #aaa; font-size: 12px; margin-top: 3px;">Click & drag on video to select text</p>
                     </div>
-                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">3</div>
-                        <div>Click START PROCESSING</div>
+                </div>
+                
+                <div id="guideStep3" class="guide-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>Process Video</strong>
+                        <p style="color: #aaa; font-size: 12px; margin-top: 3px;">Click START PROCESSING button</p>
                     </div>
-                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">4</div>
-                        <div>Download clean video</div>
+                </div>
+                
+                <div id="guideStep4" class="guide-step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <strong>Download Result</strong>
+                        <p style="color: #aaa; font-size: 12px; margin-top: 3px;">Get text-free professional video</p>
                     </div>
                 </div>
 
-                <div style="background: rgba(0,210,255,0.1); padding: 20px; border-radius: 15px;">
-                    <h4 style="color: #00d2ff; margin-bottom: 15px;">✨ Pro Tips</h4>
-                    <ul style="list-style: none; color: #aaa;">
-                        <li style="margin-bottom: 10px;">✓ Draw exact box around text</li>
-                        <li style="margin-bottom: 10px;">✓ Use AI Inpaint for best results</li>
-                        <li style="margin-bottom: 10px;">✓ Adjust intensity for perfect blend</li>
-                        <li style="margin-bottom: 10px;">✓ Max 5 minutes only</li>
+                <!-- Pro Tips Box -->
+                <div style="margin-top: 30px; background: linear-gradient(45deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1)); padding: 20px; border-radius: 15px;">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">✨ Pro Tips</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #4ecdc4;">✓</span> Draw EXACT box around text for best results
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #4ecdc4;">✓</span> Use Professional Blur for natural look
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #4ecdc4;">✓</span> Adjust intensity to match background
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #4ecdc4;">✓</span> 5 minutes max duration only
+                        </li>
                     </ul>
+                </div>
+
+                <!-- Sample Demo -->
+                <div style="margin-top: 20px; text-align: center;">
+                    <p style="color: #aaa; font-size: 12px;">
+                        ⚡ 100% Browser-based • No Server Required
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Global variables
-        let video = null;
-        let canvas = document.getElementById('videoCanvas');
-        let ctx = canvas.getContext('2d');
+        // ============ GLOBAL VARIABLES ============
+        let videoElement = document.getElementById('video');
         let drawCanvas = document.getElementById('drawCanvas');
         let drawCtx = drawCanvas.getContext('2d');
-        let videoElement = document.getElementById('video');
         let isDrawing = false;
         let startX, startY, endX, endY;
         let selectedArea = null;
         let processedFrames = [];
         let frameRate = 30;
-        let originalVideoData = null;
+        let videoLoaded = false;
+        let selectionMade = false;
 
         // Update intensity display
         document.getElementById('intensity').addEventListener('input', function() {
             document.getElementById('intensityValue').textContent = this.value + '%';
         });
 
-        // Load video function
+        // ============ VIDEO LOADING ============
         function loadVideo(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
                 const url = URL.createObjectURL(file);
                 
                 videoElement.src = url;
-                originalVideoData = file;
+                videoElement.load();
                 
                 videoElement.onloadedmetadata = function() {
                     // Check duration (max 5 minutes = 300 seconds)
                     if (videoElement.duration > 300) {
-                        alert('❌ Video exceeds 5 minutes limit!');
+                        alert('❌ Video exceeds 5 minutes limit! Please upload a shorter video.');
                         return;
                     }
                     
-                    // Hide upload area, show player
+                    // Hide upload area, show video player
                     document.getElementById('uploadArea').style.display = 'none';
                     document.getElementById('videoPlayer').style.display = 'block';
                     
-                    // Setup canvases
-                    setupCanvas();
+                    // Setup canvas
+                    setTimeout(setupCanvas, 100);
                     
-                    // Enable process button
-                    document.getElementById('processBtn').disabled = false;
+                    // Update guide
+                    updateGuide(2);
                     
                     // Display duration
                     displayDuration();
                     
-                    // Generate preview frames
-                    generatePreviewFrames();
+                    // Update stats
+                    document.getElementById('durationDisplay').innerHTML = formatTime(videoElement.duration);
+                    document.getElementById('framesDisplay').innerHTML = Math.floor(videoElement.duration * frameRate);
+                    document.getElementById('statusDisplay').innerHTML = '🎥 Ready';
+                    
+                    videoLoaded = true;
+                    
+                    // Reset selection
+                    selectedArea = null;
+                    selectionMade = false;
+                    document.getElementById('processBtn').disabled = true;
+                    document.getElementById('selectionCoordinates').innerHTML = 'No area selected';
+                    document.getElementById('statusText').innerHTML = 'Draw box on video to select text area';
+                    document.getElementById('areaDisplay').innerHTML = 'None';
+                    
+                    // Clear canvas
+                    if (drawCtx) {
+                        drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+                    }
                 };
             }
         }
 
-        // Setup canvas
+        // ============ CANVAS SETUP ============
         function setupCanvas() {
             const rect = videoElement.getBoundingClientRect();
             
-            canvas.width = rect.width;
-            canvas.height = rect.height;
             drawCanvas.width = rect.width;
             drawCanvas.height = rect.height;
             
-            // Draw first frame
-            videoElement.currentTime = 0.1;
-            videoElement.onseeked = function() {
-                drawCanvas.style.display = 'block';
-            };
+            // Set canvas style
+            drawCanvas.style.width = rect.width + 'px';
+            drawCanvas.style.height = rect.height + 'px';
+            
+            // Show instructions
+            document.getElementById('selectionInstructions').style.display = 'flex';
+            
+            // Enable process button only when selection is made
+            document.getElementById('processBtn').disabled = true;
         }
 
-        // Drawing functionality
+        // ============ DRAWING FUNCTIONS ============
         drawCanvas.addEventListener('mousedown', startDrawing);
         drawCanvas.addEventListener('mousemove', draw);
         drawCanvas.addEventListener('mouseup', stopDrawing);
         drawCanvas.addEventListener('mouseleave', stopDrawing);
+        drawCanvas.addEventListener('dblclick', clearSelection);
 
         function startDrawing(e) {
+            if (!videoLoaded) return;
+            
             isDrawing = true;
             const rect = drawCanvas.getBoundingClientRect();
-            startX = (e.clientX - rect.left) * (drawCanvas.width / rect.width);
-            startY = (e.clientY - rect.top) * (drawCanvas.height / rect.height);
+            const scaleX = drawCanvas.width / rect.width;
+            const scaleY = drawCanvas.height / rect.height;
+            
+            startX = (e.clientX - rect.left) * scaleX;
+            startY = (e.clientY - rect.top) * scaleY;
+            
+            // Clear previous selection
+            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
         }
 
         function draw(e) {
-            if (!isDrawing) return;
+            if (!isDrawing || !videoLoaded) return;
+            
+            e.preventDefault();
             
             const rect = drawCanvas.getBoundingClientRect();
-            endX = (e.clientX - rect.left) * (drawCanvas.width / rect.width);
-            endY = (e.clientY - rect.top) * (drawCanvas.height / rect.height);
+            const scaleX = drawCanvas.width / rect.width;
+            const scaleY = drawCanvas.height / rect.height;
+            
+            endX = (e.clientX - rect.left) * scaleX;
+            endY = (e.clientY - rect.top) * scaleY;
             
             // Clear and draw rectangle
             drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-            drawCtx.strokeStyle = '#00d2ff';
+            drawCtx.strokeStyle = '#4ecdc4';
             drawCtx.lineWidth = 3;
-            drawCtx.setLineDash([5, 5]);
+            drawCtx.setLineDash([8, 8]);
             
             const width = endX - startX;
             const height = endY - startY;
             
             drawCtx.strokeRect(startX, startY, width, height);
             
-            // Store selected area
-            selectedArea = {
-                x: Math.min(startX, endX),
-                y: Math.min(startY, endY),
-                width: Math.abs(width),
-                height: Math.abs(height)
-            };
-            
-            document.getElementById('areaDisplay').innerHTML = 
-                `${Math.round(selectedArea.width)}x${Math.round(selectedArea.height)}px`;
+            // Add semi-transparent fill
+            drawCtx.fillStyle = 'rgba(78, 205, 196, 0.1)';
+            drawCtx.fillRect(startX, startY, width, height);
         }
 
         function stopDrawing() {
+            if (!isDrawing || !videoLoaded) return;
+            
             isDrawing = false;
+            
+            // Calculate selected area
+            const width = Math.abs(endX - startX);
+            const height = Math.abs(endY - startY);
+            
+            // Only create selection if area is big enough
+            if (width > 10 && height > 10) {
+                selectedArea = {
+                    x: Math.min(startX, endX),
+                    y: Math.min(startY, endY),
+                    width: width,
+                    height: height
+                };
+                
+                selectionMade = true;
+                
+                // Update UI
+                document.getElementById('processBtn').disabled = false;
+                document.getElementById('selectionStatus').style.color = '#4ecdc4';
+                document.getElementById('statusText').innerHTML = '✅ Text area selected! Ready to process.';
+                document.getElementById('statusText').style.color = '#4ecdc4';
+                document.getElementById('selectionCoordinates').innerHTML = 
+                    `📍 Area: ${Math.round(width)}x${Math.round(height)}px | Position: (${Math.round(selectedArea.x)}, ${Math.round(selectedArea.y)})`;
+                document.getElementById('areaDisplay').innerHTML = `${Math.round(width)}x${Math.round(height)}px`;
+                
+                // Hide instructions
+                document.getElementById('selectionInstructions').style.display = 'none';
+                
+                // Update guide
+                updateGuide(3);
+            } else {
+                // Area too small
+                drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+            }
         }
 
-        // Process video - REAL TEXT REMOVAL
+        function clearSelection() {
+            selectedArea = null;
+            selectionMade = false;
+            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+            
+            document.getElementById('processBtn').disabled = true;
+            document.getElementById('statusText').innerHTML = 'Draw box on video to select text area';
+            document.getElementById('statusText').style.color = '#ffb142';
+            document.getElementById('selectionCoordinates').innerHTML = 'No area selected';
+            document.getElementById('areaDisplay').innerHTML = 'None';
+            document.getElementById('selectionInstructions').style.display = 'flex';
+        }
+
+        // ============ VIDEO PROCESSING ============
         async function processVideo() {
+            // CRITICAL FIX: Check if area is selected
             if (!selectedArea) {
-                alert('❌ Please select text area first!');
+                document.getElementById('errorMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 3000);
                 return;
             }
+
+            // Hide error if visible
+            document.getElementById('errorMessage').style.display = 'none';
 
             const processBtn = document.getElementById('processBtn');
             const progressContainer = document.getElementById('progressContainer');
@@ -508,91 +809,63 @@
             // Show progress
             progressContainer.style.display = 'block';
             processBtn.disabled = true;
+            processBtn.innerHTML = '<span>⚙️</span> PROCESSING... 0%';
+            document.getElementById('statusDisplay').innerHTML = '⚙️ Processing';
             processedFrames = [];
 
-            // Get video frames
-            const tempVideo = document.createElement('video');
-            tempVideo.src = videoElement.src;
-            tempVideo.crossOrigin = 'anonymous';
+            // Get video dimensions
+            const videoWidth = videoElement.videoWidth;
+            const videoHeight = videoElement.videoHeight;
             
-            await tempVideo.play();
-            
-            const stream = tempVideo.captureStream();
-            const track = stream.getVideoTracks()[0];
-            const processor = new MediaStreamTrackProcessor({ track });
-            const reader = processor.readable.getReader();
-            
+            // Create canvas for processing
             const canvas = document.createElement('canvas');
-            canvas.width = tempVideo.videoWidth * quality;
-            canvas.height = tempVideo.videoHeight * quality;
+            canvas.width = videoWidth * quality;
+            canvas.height = videoHeight * quality;
             const ctx = canvas.getContext('2d');
-            
-            let frameCount = 0;
-            const totalFrames = Math.min(Math.floor(tempVideo.duration * frameRate), 300); // Max 5 min @ 30fps
-            
-            document.getElementById('framesDisplay').innerHTML = totalFrames;
             
             // Scale selected area
             const scaleX = canvas.width / videoElement.videoWidth;
             const scaleY = canvas.height / videoElement.videoHeight;
             
             const scaledArea = {
-                x: selectedArea.x * scaleX,
-                y: selectedArea.y * scaleY,
-                width: selectedArea.width * scaleX,
-                height: selectedArea.height * scaleY
+                x: Math.max(0, selectedArea.x * scaleX),
+                y: Math.max(0, selectedArea.y * scaleY),
+                width: Math.min(canvas.width - selectedArea.x * scaleX, selectedArea.width * scaleX),
+                height: Math.min(canvas.height - selectedArea.y * scaleY, selectedArea.height * scaleY)
             };
 
-            // Process each frame
-            while (frameCount < totalFrames) {
-                const { value, done } = await reader.read();
-                if (done) break;
+            // Create temporary video element for frame extraction
+            const tempVideo = document.createElement('video');
+            tempVideo.src = videoElement.src;
+            tempVideo.crossOrigin = 'anonymous';
+            
+            await new Promise((resolve) => {
+                tempVideo.onloadedmetadata = resolve;
+                tempVideo.load();
+            });
+
+            const totalFrames = Math.min(Math.floor(tempVideo.duration * frameRate), 9000); // 5 min @ 30fps
+            let frameCount = 0;
+
+            // Process frames
+            for (let i = 0; i < totalFrames; i++) {
+                tempVideo.currentTime = (i / frameRate);
+                
+                await new Promise((resolve) => {
+                    tempVideo.onseeked = resolve;
+                });
                 
                 // Draw frame
-                ctx.drawImage(value, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
                 
                 // Get image data
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 const data = imageData.data;
                 
                 // REMOVE TEXT - ACTUAL PROCESSING
-                if (method === 'inpaint') {
-                    // Smart inpainting - blend surrounding pixels
-                    for (let y = Math.max(0, scaledArea.y); y < Math.min(canvas.height, scaledArea.y + scaledArea.height); y++) {
-                        for (let x = Math.max(0, scaledArea.x); x < Math.min(canvas.width, scaledArea.x + scaledArea.width); x++) {
-                            const i = (y * canvas.width + x) * 4;
-                            
-                            // Average surrounding pixels
-                            let r = 0, g = 0, b = 0, count = 0;
-                            
-                            for (let ny = -2; ny <= 2; ny++) {
-                                for (let nx = -2; nx <= 2; nx++) {
-                                    const px = x + nx;
-                                    const py = y + ny;
-                                    
-                                    if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
-                                        if (px < scaledArea.x || px > scaledArea.x + scaledArea.width ||
-                                            py < scaledArea.y || py > scaledArea.y + scaledArea.height) {
-                                            const ni = (py * canvas.width + px) * 4;
-                                            r += data[ni];
-                                            g += data[ni + 1];
-                                            b += data[ni + 2];
-                                            count++;
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            if (count > 0) {
-                                data[i] = r / count;
-                                data[i + 1] = g / count;
-                                data[i + 2] = b / count;
-                            }
-                        }
-                    }
-                } else if (method === 'blur') {
-                    // Gaussian blur
-                    const kernelSize = Math.max(3, Math.floor(10 * intensity));
+                if (method === 'blur') {
+                    // Professional blur effect
+                    const kernelSize = Math.max(5, Math.floor(15 * intensity));
                     const half = Math.floor(kernelSize / 2);
                     
                     for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y++) {
@@ -603,87 +876,147 @@
                                 for (let kx = -half; kx <= half; kx++) {
                                     const px = Math.min(Math.max(x + kx, 0), canvas.width - 1);
                                     const py = Math.min(Math.max(y + ky, 0), canvas.height - 1);
-                                    const i = (py * canvas.width + px) * 4;
+                                    const idx = (py * canvas.width + px) * 4;
                                     
-                                    r += data[i];
-                                    g += data[i + 1];
-                                    b += data[i + 2];
+                                    r += data[idx];
+                                    g += data[idx + 1];
+                                    b += data[idx + 2];
                                     count++;
                                 }
                             }
                             
-                            const i = (y * canvas.width + x) * 4;
-                            data[i] = r / count;
-                            data[i + 1] = g / count;
-                            data[i + 2] = b / count;
+                            const idx = (y * canvas.width + x) * 4;
+                            data[idx] = r / count;
+                            data[idx + 1] = g / count;
+                            data[idx + 2] = b / count;
+                        }
+                    }
+                } else if (method === 'inpaint') {
+                    // Smart inpainting
+                    for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y++) {
+                        for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x++) {
+                            const idx = (y * canvas.width + x) * 4;
+                            
+                            // Use surrounding pixels
+                            let r = 0, g = 0, b = 0, count = 0;
+                            
+                            for (let ny = -3; ny <= 3; ny++) {
+                                for (let nx = -3; nx <= 3; nx++) {
+                                    const px = x + nx;
+                                    const py = y + ny;
+                                    
+                                    if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
+                                        if (px < scaledArea.x || px > scaledArea.x + scaledArea.width ||
+                                            py < scaledArea.y || py > scaledArea.y + scaledArea.height) {
+                                            const nidx = (py * canvas.width + px) * 4;
+                                            r += data[nidx];
+                                            g += data[nidx + 1];
+                                            b += data[nidx + 2];
+                                            count++;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (count > 0) {
+                                data[idx] = r / count;
+                                data[idx + 1] = g / count;
+                                data[idx + 2] = b / count;
+                            }
                         }
                     }
                 } else if (method === 'pixelate') {
                     // Pixelate effect
-                    const blockSize = Math.max(4, Math.floor(8 * intensity));
+                    const blockSize = Math.max(6, Math.floor(12 * intensity));
                     
                     for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y += blockSize) {
                         for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x += blockSize) {
-                            const i = (y * canvas.width + x) * 4;
-                            const r = data[i];
-                            const g = data[i + 1];
-                            const b = data[i + 2];
+                            const idx = (Math.min(y, canvas.height - 1) * canvas.width + Math.min(x, canvas.width - 1)) * 4;
+                            const r = data[idx];
+                            const g = data[idx + 1];
+                            const b = data[idx + 2];
                             
                             for (let py = y; py < Math.min(y + blockSize, scaledArea.y + scaledArea.height); py++) {
                                 for (let px = x; px < Math.min(x + blockSize, scaledArea.x + scaledArea.width); px++) {
-                                    const pi = (py * canvas.width + px) * 4;
-                                    data[pi] = r;
-                                    data[pi + 1] = g;
-                                    data[pi + 2] = b;
+                                    if (py < canvas.height && px < canvas.width) {
+                                        const pidx = (py * canvas.width + px) * 4;
+                                        data[pidx] = r;
+                                        data[pidx + 1] = g;
+                                        data[pidx + 2] = b;
+                                    }
                                 }
                             }
                         }
                     }
                 } else if (method === 'solid') {
-                    // Solid color fill
-                    const color = [30, 30, 30]; // Dark gray
+                    // Solid color fill (matches surrounding)
+                    let avgR = 0, avgG = 0, avgB = 0, count = 0;
                     
-                    for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y++) {
-                        for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x++) {
-                            const i = (y * canvas.width + x) * 4;
-                            data[i] = color[0];
-                            data[i + 1] = color[1];
-                            data[i + 2] = color[2];
+                    // Sample surrounding area
+                    for (let y = Math.max(0, scaledArea.y - 10); y < Math.min(canvas.height, scaledArea.y + scaledArea.height + 10); y++) {
+                        for (let x = Math.max(0, scaledArea.x - 10); x < Math.min(canvas.width, scaledArea.x + scaledArea.width + 10); x++) {
+                            if (x < scaledArea.x || x > scaledArea.x + scaledArea.width ||
+                                y < scaledArea.y || y > scaledArea.y + scaledArea.height) {
+                                const idx = (y * canvas.width + x) * 4;
+                                avgR += data[idx];
+                                avgG += data[idx + 1];
+                                avgB += data[idx + 2];
+                                count++;
+                            }
+                        }
+                    }
+                    
+                    if (count > 0) {
+                        avgR /= count;
+                        avgG /= count;
+                        avgB /= count;
+                        
+                        for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y++) {
+                            for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x++) {
+                                const idx = (y * canvas.width + x) * 4;
+                                data[idx] = avgR;
+                                data[idx + 1] = avgG;
+                                data[idx + 2] = avgB;
+                            }
                         }
                     }
                 }
                 
                 ctx.putImageData(imageData, 0, 0);
                 
-                // Store processed frame
+                // Store frame
                 processedFrames.push(canvas.toDataURL('image/jpeg', 0.9));
                 
                 // Update progress
                 frameCount++;
-                const progress = (frameCount / totalFrames) * 100;
+                const progress = Math.round((frameCount / totalFrames) * 100);
                 progressFill.style.width = progress + '%';
-                progressPercent.textContent = Math.round(progress) + '%';
+                progressPercent.textContent = progress + '%';
                 progressStatus.textContent = `Processing frame ${frameCount}/${totalFrames}`;
-                
-                // Release frame
-                value.close();
+                processBtn.innerHTML = `<span>⚙️</span> PROCESSING... ${progress}%`;
                 
                 // Allow UI to update
-                await new Promise(resolve => setTimeout(resolve, 10));
+                await new Promise(resolve => setTimeout(resolve, 5));
             }
-            
-            track.stop();
+
+            // Processing complete
+            progressFill.style.width = '100%';
+            progressPercent.textContent = '100%';
+            progressStatus.textContent = '✅ Processing complete! Ready to download.';
+            processBtn.innerHTML = '<span>✅</span> PROCESSING COMPLETE';
             
             // Show download section
             document.getElementById('downloadSection').style.display = 'block';
-            progressStatus.textContent = '✅ Processing complete! Ready to download.';
-            processBtn.innerHTML = '✅ PROCESSING COMPLETE';
+            document.getElementById('statusDisplay').innerHTML = '✅ Complete';
+            
+            // Update guide
+            updateGuide(4);
         }
 
-        // Download processed video
+        // ============ DOWNLOAD VIDEO ============
         function downloadVideo() {
             if (processedFrames.length === 0) {
-                alert('No processed video available!');
+                alert('No processed video available. Please process a video first.');
                 return;
             }
 
@@ -691,7 +1024,6 @@
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Load first frame to get dimensions
             const img = new Image();
             img.src = processedFrames[0];
             
@@ -726,15 +1058,14 @@
                 
                 recorder.start();
                 
-                // Draw frames
                 let frameIndex = 0;
                 
                 function drawNextFrame() {
                     if (frameIndex < processedFrames.length) {
-                        const img = new Image();
-                        img.src = processedFrames[frameIndex];
-                        img.onload = function() {
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        const frameImg = new Image();
+                        frameImg.src = processedFrames[frameIndex];
+                        frameImg.onload = function() {
+                            ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
                             frameIndex++;
                             setTimeout(drawNextFrame, 1000 / frameRate);
                         };
@@ -747,7 +1078,7 @@
             };
         }
 
-        // Helper functions
+        // ============ HELPER FUNCTIONS ============
         function seekVideo(value) {
             if (videoElement.duration) {
                 videoElement.currentTime = (value / 100) * videoElement.duration;
@@ -760,7 +1091,6 @@
                 const total = formatTime(videoElement.duration);
                 document.getElementById('currentTime').textContent = current;
                 document.getElementById('totalTime').textContent = total;
-                document.getElementById('durationDisplay').textContent = total;
                 document.getElementById('frameSlider').value = (videoElement.currentTime / videoElement.duration) * 100;
             });
         }
@@ -771,9 +1101,21 @@
             return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        function generatePreviewFrames() {
-            // Generate preview thumbnails
+        function updateGuide(step) {
+            for (let i = 1; i <= 4; i++) {
+                const element = document.getElementById(`guideStep${i}`);
+                if (i === step) {
+                    element.classList.add('active');
+                } else {
+                    element.classList.remove('active');
+                }
+            }
         }
+
+        // Reset everything on page load
+        window.onload = function() {
+            console.log('Video Text Remover Pro ready!');
+        };
     </script>
 </body>
 </html>
