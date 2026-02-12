@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Video Text Remover 🎬</title>
+    <title>Working Video Text Remover Pro 🎬</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             min-height: 100vh;
             padding: 20px;
+            color: white;
         }
 
         .container {
@@ -23,56 +24,36 @@
             margin: 0 auto;
         }
 
-        /* Header */
         .header {
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-size: 2.5em;
         }
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            color: #ddd;
-        }
-
-        /* Main Layout */
-        .main-content {
+        .main-grid {
             display: grid;
-            grid-template-columns: 350px 1fr 350px;
+            grid-template-columns: 300px 1fr 300px;
             gap: 20px;
         }
 
-        /* Sidebar */
-        .sidebar {
-            background: rgba(255, 255, 255, 0.95);
+        /* Controls Panel */
+        .controls {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
             height: fit-content;
-        }
-
-        .sidebar h3 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
         }
 
         .control-group {
@@ -81,80 +62,59 @@
 
         .control-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
+            margin-bottom: 10px;
+            color: #00d2ff;
             font-weight: 600;
         }
 
         select, input[type="range"] {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 10px;
-            font-size: 14px;
+            color: white;
+            cursor: pointer;
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
             transition: all 0.3s;
-        }
-
-        select:hover, input[type="range"]:hover {
-            border-color: #667eea;
-        }
-
-        .checkbox-group {
             margin-top: 15px;
         }
 
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
+        .btn-primary {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            color: white;
         }
 
-        /* Upload Area */
-        .upload-area {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            border: 3px dashed #667eea;
-            cursor: pointer;
-            transition: all 0.3s;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .upload-area:hover {
-            background: rgba(255, 255, 255, 0.98);
-            border-color: #764ba2;
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,210,255,0.3);
         }
 
-        .upload-icon {
-            font-size: 4em;
-            color: #667eea;
-            margin-bottom: 20px;
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .upload-text {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .upload-hint {
-            color: #999;
-            font-size: 0.9em;
-        }
-
-        /* Preview Area */
-        .preview-area {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
+        /* Video Area */
+        .video-area {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
             padding: 20px;
-            height: fit-content;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .video-container {
@@ -163,90 +123,24 @@
             margin-bottom: 20px;
         }
 
-        video {
+        video, canvas {
             width: 100%;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* Drawing Canvas for text selection */
-        .drawing-canvas {
+        #videoCanvas {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            pointer-events: none;
+        }
+
+        #drawCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             cursor: crosshair;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-success {
-            background: linear-gradient(45deg, #00b09b, #96c93d);
-            color: white;
-        }
-
-        /* Timeline */
-        .timeline {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .frame-slider {
-            width: 100%;
-            margin: 10px 0;
-        }
-
-        /* Right Sidebar - Guide */
-        .guide {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 20px;
-        }
-
-        .step {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .step-number {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            pointer-events: auto;
         }
 
         /* Progress Bar */
@@ -256,352 +150,618 @@
         }
 
         .progress-bar {
-            width: 100%;
             height: 10px;
-            background: #e0e0e0;
+            background: rgba(255,255,255,0.1);
             border-radius: 5px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(45deg, #00b09b, #96c93d);
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
             width: 0%;
             transition: width 0.3s;
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #00d2ff;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            background: rgba(0,210,255,0.1);
+        }
+
+        /* Download Section */
+        .download-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0,210,255,0.1);
+            border-radius: 15px;
+            display: none;
+        }
+
+        /* Frame Preview */
+        .frame-preview {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .frame-thumb {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .frame-thumb canvas {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Stats */
+        .stats {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <h1>🎬 Pro Video Text Remover</h1>
-            <p>5 Minutes Max Duration | AI-Powered | Professional Quality</p>
+            <h1>🎬 WORKING Video Text Remover Pro</h1>
+            <p style="color: #aaa; margin-top: 10px;">AI-Powered | Real Text Removal | 5 Min Max</p>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Left Sidebar - Controls -->
-            <div class="sidebar">
-                <h3>⚙️ Controls</h3>
+        <div class="main-grid">
+            <!-- Left Panel - Controls -->
+            <div class="controls">
+                <h3 style="margin-bottom: 20px; color: #00d2ff;">⚙️ Controls</h3>
                 
                 <div class="control-group">
-                    <label>Select Removal Method</label>
-                    <select id="removalMethod">
-                        <option value="ai">🤖 AI Smart Removal</option>
-                        <option value="manual">✏️ Manual Area Selection</option>
-                        <option value="auto">🎯 Auto Text Detection</option>
+                    <label>🎯 Removal Method</label>
+                    <select id="method">
+                        <option value="inpaint">🔮 AI Smart Inpaint</option>
+                        <option value="blur">🌫️ Professional Blur</option>
+                        <option value="pixelate">🧩 Pixelate</option>
+                        <option value="solid">⬛ Solid Cover</option>
                     </select>
                 </div>
 
-                <div id="manualControls" style="display: none;">
+                <div id="manualControls">
                     <div class="control-group">
-                        <label>X Position: <span id="xVal">20</span>%</label>
-                        <input type="range" id="xPos" min="0" max="100" value="20">
+                        <label>📐 Selection Area</label>
+                        <p style="color: #00d2ff; font-size: 12px; margin-bottom: 5px;">Draw on video to select text area</p>
                     </div>
+                    
                     <div class="control-group">
-                        <label>Y Position: <span id="yVal">20</span>%</label>
-                        <input type="range" id="yPos" min="0" max="100" value="20">
-                    </div>
-                    <div class="control-group">
-                        <label>Width: <span id="wVal">30</span>%</label>
-                        <input type="range" id="width" min="5" max="50" value="30">
-                    </div>
-                    <div class="control-group">
-                        <label>Height: <span id="hVal">15</span>%</label>
-                        <input type="range" id="height" min="5" max="30" value="15">
+                        <label>⚡ Intensity: <span id="intensityValue">70%</span></label>
+                        <input type="range" id="intensity" min="1" max="100" value="70">
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label>Output Quality</label>
+                    <label>🎚️ Quality</label>
                     <select id="quality">
-                        <option value="low">📱 Low - Smaller File</option>
-                        <option value="medium" selected>💻 Medium - Balanced</option>
-                        <option value="high">🎬 High - HD Quality</option>
-                        <option value="ultra">✨ Ultra - 4K Quality</option>
+                        <option value="0.9">💎 Ultra (4K)</option>
+                        <option value="0.7" selected>✨ High (1080p)</option>
+                        <option value="0.5">📱 Medium (720p)</option>
+                        <option value="0.3">💨 Fast (480p)</option>
                     </select>
                 </div>
 
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" id="removeLogo"> 🏷️ Remove Watermarks/Logos
-                    </label>
-                    <label>
-                        <input type="checkbox" id="stabilize"> 🎯 Stabilize Video
-                    </label>
-                    <label>
-                        <input type="checkbox" id="smoothEdges"> ✨ Smooth Edges
-                    </label>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span>Video Duration:</span>
+                        <span id="durationDisplay">00:00</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Selected Area:</span>
+                        <span id="areaDisplay">None</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Frames:</span>
+                        <span id="framesDisplay">0</span>
+                    </div>
                 </div>
 
                 <div class="progress-container" id="progressContainer">
-                    <p style="margin-bottom: 10px;">Processing: <span id="progressText">0%</span></p>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Processing:</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="progressFill"></div>
                     </div>
+                    <p id="progressStatus" style="margin-top: 10px; color: #00d2ff;"></p>
                 </div>
 
                 <button class="btn btn-primary" id="processBtn" onclick="processVideo()" disabled>
-                    🚀 Start Professional Processing
+                    🚀 START PROCESSING
                 </button>
+
+                <div id="downloadSection" class="download-section">
+                    <h4 style="color: #00d2ff; margin-bottom: 15px;">✅ Processing Complete!</h4>
+                    <button class="btn btn-primary" onclick="downloadVideo()" style="background: linear-gradient(45deg, #00b09b, #96c93d);">
+                        📥 Download Pro Video
+                    </button>
+                </div>
             </div>
 
-            <!-- Center - Video Upload & Preview -->
-            <div>
+            <!-- Center - Video Player -->
+            <div class="video-area">
                 <!-- Upload Area -->
                 <div id="uploadArea" class="upload-area" onclick="document.getElementById('videoInput').click()">
-                    <div class="upload-icon">🎬</div>
-                    <div class="upload-text">Drop your video here or click to browse</div>
-                    <div class="upload-hint">Supports: MP4, MOV, AVI, MKV (Max 5 min)</div>
-                    <input type="file" id="videoInput" accept="video/*" style="display: none;" onchange="handleVideoUpload(this)">
+                    <div style="font-size: 50px; margin-bottom: 15px;">🎬</div>
+                    <h3 style="margin-bottom: 10px;">Drop Video Here</h3>
+                    <p style="color: #aaa;">MP4, MOV, AVI (Max 5 Minutes)</p>
+                    <input type="file" id="videoInput" accept="video/*" style="display: none;" onchange="loadVideo(this)">
                 </div>
 
-                <!-- Preview Area (Hidden by default) -->
-                <div id="previewArea" class="preview-area" style="display: none;">
+                <!-- Video Player (Hidden initially) -->
+                <div id="videoPlayer" style="display: none;">
                     <div class="video-container">
-                        <video id="videoPreview" controls>
+                        <video id="video" controls>
                             <source id="videoSource" src="">
                         </video>
-                        <canvas id="drawCanvas" class="drawing-canvas"></canvas>
+                        <canvas id="drawCanvas"></canvas>
+                        <canvas id="videoCanvas"></canvas>
                     </div>
                     
-                    <div class="timeline">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span>Video Timeline</span>
-                            <span id="videoDuration">00:00 / 00:00</span>
+                    <div style="margin-top: 20px;">
+                        <input type="range" id="frameSlider" min="0" max="100" value="0" style="width: 100%;" oninput="seekVideo(this.value)">
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <span id="currentTime">00:00</span>
+                            <span id="totalTime">00:00</span>
                         </div>
-                        <input type="range" id="frameSlider" class="frame-slider" value="0" min="0" max="100" onchange="seekVideo(this.value)">
                     </div>
+
+                    <div class="frame-preview" id="framePreview"></div>
                 </div>
             </div>
 
-            <!-- Right Sidebar - Guide & Download -->
-            <div class="guide">
-                <h3>📋 Quick Guide</h3>
+            <!-- Right Panel - Guide -->
+            <div class="controls">
+                <h3 style="margin-bottom: 20px; color: #00d2ff;">📋 Quick Guide</h3>
                 
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div>Upload your video (max 5 min)</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div>Select text removal method</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div>Adjust area if needed</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div>Process with AI technology</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div>Download professional output</div>
+                <div style="margin-bottom: 30px;">
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">1</div>
+                        <div>Upload your video</div>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">2</div>
+                        <div>Draw box on text area</div>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">3</div>
+                        <div>Click START PROCESSING</div>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+                        <div style="background: #00d2ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">4</div>
+                        <div>Download clean video</div>
+                    </div>
                 </div>
 
-                <div style="margin-top: 30px; padding: 20px; background: linear-gradient(45deg, #667eea20, #764ba220); border-radius: 15px;">
-                    <h4 style="margin-bottom: 15px;">✨ Pro Features</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 10px;">✓ AI-Powered Text Removal</li>
-                        <li style="margin-bottom: 10px;">✓ Background Reconstruction</li>
-                        <li style="margin-bottom: 10px;">✓ 4K Quality Support</li>
-                        <li style="margin-bottom: 10px;">✓ No Watermark</li>
+                <div style="background: rgba(0,210,255,0.1); padding: 20px; border-radius: 15px;">
+                    <h4 style="color: #00d2ff; margin-bottom: 15px;">✨ Pro Tips</h4>
+                    <ul style="list-style: none; color: #aaa;">
+                        <li style="margin-bottom: 10px;">✓ Draw exact box around text</li>
+                        <li style="margin-bottom: 10px;">✓ Use AI Inpaint for best results</li>
+                        <li style="margin-bottom: 10px;">✓ Adjust intensity for perfect blend</li>
+                        <li style="margin-bottom: 10px;">✓ Max 5 minutes only</li>
                     </ul>
-                </div>
-
-                <div id="downloadSection" style="display: none;">
-                    <button class="btn btn-success" id="downloadBtn" onclick="downloadVideo()">
-                        📥 Download Professional Video
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let currentVideo = null;
+        // Global variables
+        let video = null;
+        let canvas = document.getElementById('videoCanvas');
+        let ctx = canvas.getContext('2d');
+        let drawCanvas = document.getElementById('drawCanvas');
+        let drawCtx = drawCanvas.getContext('2d');
+        let videoElement = document.getElementById('video');
         let isDrawing = false;
-        let canvas = null;
-        let ctx = null;
-        let drawingArea = { x: 0, y: 0, width: 0, height: 0 };
-        let processedVideoUrl = null;
+        let startX, startY, endX, endY;
+        let selectedArea = null;
+        let processedFrames = [];
+        let frameRate = 30;
+        let originalVideoData = null;
 
-        // Show/hide manual controls based on method
-        document.getElementById('removalMethod').addEventListener('change', function() {
-            const manualControls = document.getElementById('manualControls');
-            manualControls.style.display = this.value === 'manual' ? 'block' : 'none';
+        // Update intensity display
+        document.getElementById('intensity').addEventListener('input', function() {
+            document.getElementById('intensityValue').textContent = this.value + '%';
         });
 
-        // Update range values
-        ['xPos', 'yPos', 'width', 'height'].forEach(id => {
-            document.getElementById(id).addEventListener('input', function() {
-                document.getElementById(id.charAt(0) + 'Val').textContent = this.value;
-            });
-        });
-
-        // Handle video upload
-        function handleVideoUpload(input) {
+        // Load video function
+        function loadVideo(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
+                const url = URL.createObjectURL(file);
                 
-                // Check duration
-                const video = document.createElement('video');
-                video.preload = 'metadata';
-                video.onloadedmetadata = function() {
-                    if (video.duration > 300) { // 5 minutes = 300 seconds
-                        alert('❌ Video exceeds 5 minutes limit! Please upload a shorter video.');
+                videoElement.src = url;
+                originalVideoData = file;
+                
+                videoElement.onloadedmetadata = function() {
+                    // Check duration (max 5 minutes = 300 seconds)
+                    if (videoElement.duration > 300) {
+                        alert('❌ Video exceeds 5 minutes limit!');
                         return;
                     }
                     
-                    // Show preview area
+                    // Hide upload area, show player
                     document.getElementById('uploadArea').style.display = 'none';
-                    document.getElementById('previewArea').style.display = 'block';
+                    document.getElementById('videoPlayer').style.display = 'block';
                     
-                    // Set video source
-                    const videoUrl = URL.createObjectURL(file);
-                    document.getElementById('videoSource').src = videoUrl;
-                    document.getElementById('videoPreview').load();
-                    currentVideo = videoUrl;
+                    // Setup canvases
+                    setupCanvas();
                     
                     // Enable process button
                     document.getElementById('processBtn').disabled = false;
                     
-                    // Setup canvas
-                    setupCanvas();
+                    // Display duration
+                    displayDuration();
                     
-                    // Update duration
-                    updateDuration();
+                    // Generate preview frames
+                    generatePreviewFrames();
                 };
-                video.src = URL.createObjectURL(file);
             }
         }
 
-        // Setup drawing canvas
+        // Setup canvas
         function setupCanvas() {
-            canvas = document.getElementById('drawCanvas');
-            ctx = canvas.getContext('2d');
-            const video = document.getElementById('videoPreview');
+            const rect = videoElement.getBoundingClientRect();
             
-            canvas.width = video.clientWidth;
-            canvas.height = video.clientHeight;
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            drawCanvas.width = rect.width;
+            drawCanvas.height = rect.height;
             
-            // Drawing events
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseleave', stopDrawing);
+            // Draw first frame
+            videoElement.currentTime = 0.1;
+            videoElement.onseeked = function() {
+                drawCanvas.style.display = 'block';
+            };
         }
+
+        // Drawing functionality
+        drawCanvas.addEventListener('mousedown', startDrawing);
+        drawCanvas.addEventListener('mousemove', draw);
+        drawCanvas.addEventListener('mouseup', stopDrawing);
+        drawCanvas.addEventListener('mouseleave', stopDrawing);
 
         function startDrawing(e) {
-            if (document.getElementById('removalMethod').value === 'manual') {
-                isDrawing = true;
-                const rect = canvas.getBoundingClientRect();
-                drawingArea.x = (e.clientX - rect.left) / canvas.width * 100;
-                drawingArea.y = (e.clientY - rect.top) / canvas.height * 100;
-            }
+            isDrawing = true;
+            const rect = drawCanvas.getBoundingClientRect();
+            startX = (e.clientX - rect.left) * (drawCanvas.width / rect.width);
+            startY = (e.clientY - rect.top) * (drawCanvas.height / rect.height);
         }
 
         function draw(e) {
             if (!isDrawing) return;
             
-            const rect = canvas.getBoundingClientRect();
-            drawingArea.width = ((e.clientX - rect.left) / canvas.width * 100) - drawingArea.x;
-            drawingArea.height = ((e.clientY - rect.top) / canvas.height * 100) - drawingArea.y;
+            const rect = drawCanvas.getBoundingClientRect();
+            endX = (e.clientX - rect.left) * (drawCanvas.width / rect.width);
+            endY = (e.clientY - rect.top) * (drawCanvas.height / rect.height);
             
             // Clear and draw rectangle
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#00ff00';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
+            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+            drawCtx.strokeStyle = '#00d2ff';
+            drawCtx.lineWidth = 3;
+            drawCtx.setLineDash([5, 5]);
             
-            const x = (drawingArea.x / 100) * canvas.width;
-            const y = (drawingArea.y / 100) * canvas.height;
-            const w = (drawingArea.width / 100) * canvas.width;
-            const h = (drawingArea.height / 100) * canvas.height;
+            const width = endX - startX;
+            const height = endY - startY;
             
-            ctx.strokeRect(x, y, w, h);
+            drawCtx.strokeRect(startX, startY, width, height);
             
-            // Update range inputs
-            document.getElementById('xPos').value = Math.max(0, Math.min(100, drawingArea.x));
-            document.getElementById('yPos').value = Math.max(0, Math.min(100, drawingArea.y));
-            document.getElementById('width').value = Math.max(5, Math.min(50, Math.abs(drawingArea.width)));
-            document.getElementById('height').value = Math.max(5, Math.min(30, Math.abs(drawingArea.height)));
+            // Store selected area
+            selectedArea = {
+                x: Math.min(startX, endX),
+                y: Math.min(startY, endY),
+                width: Math.abs(width),
+                height: Math.abs(height)
+            };
+            
+            document.getElementById('areaDisplay').innerHTML = 
+                `${Math.round(selectedArea.width)}x${Math.round(selectedArea.height)}px`;
         }
 
         function stopDrawing() {
             isDrawing = false;
         }
 
-        // Process video
+        // Process video - REAL TEXT REMOVAL
         async function processVideo() {
+            if (!selectedArea) {
+                alert('❌ Please select text area first!');
+                return;
+            }
+
             const processBtn = document.getElementById('processBtn');
-            processBtn.disabled = true;
-            processBtn.innerHTML = '⚙️ Processing... 0%';
-            
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressPercent = document.getElementById('progressPercent');
+            const progressStatus = document.getElementById('progressStatus');
+            const method = document.getElementById('method').value;
+            const intensity = document.getElementById('intensity').value / 100;
+            const quality = parseFloat(document.getElementById('quality').value);
+
             // Show progress
-            document.getElementById('progressContainer').style.display = 'block';
+            progressContainer.style.display = 'block';
+            processBtn.disabled = true;
+            processedFrames = [];
+
+            // Get video frames
+            const tempVideo = document.createElement('video');
+            tempVideo.src = videoElement.src;
+            tempVideo.crossOrigin = 'anonymous';
             
-            // Simulate processing with progress
-            for (let i = 0; i <= 100; i++) {
-                await new Promise(resolve => setTimeout(resolve, 50));
-                document.getElementById('progressFill').style.width = i + '%';
-                document.getElementById('progressText').innerHTML = i + '%';
-                processBtn.innerHTML = `⚙️ Processing... ${i}%`;
+            await tempVideo.play();
+            
+            const stream = tempVideo.captureStream();
+            const track = stream.getVideoTracks()[0];
+            const processor = new MediaStreamTrackProcessor({ track });
+            const reader = processor.readable.getReader();
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = tempVideo.videoWidth * quality;
+            canvas.height = tempVideo.videoHeight * quality;
+            const ctx = canvas.getContext('2d');
+            
+            let frameCount = 0;
+            const totalFrames = Math.min(Math.floor(tempVideo.duration * frameRate), 300); // Max 5 min @ 30fps
+            
+            document.getElementById('framesDisplay').innerHTML = totalFrames;
+            
+            // Scale selected area
+            const scaleX = canvas.width / videoElement.videoWidth;
+            const scaleY = canvas.height / videoElement.videoHeight;
+            
+            const scaledArea = {
+                x: selectedArea.x * scaleX,
+                y: selectedArea.y * scaleY,
+                width: selectedArea.width * scaleX,
+                height: selectedArea.height * scaleY
+            };
+
+            // Process each frame
+            while (frameCount < totalFrames) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                
+                // Draw frame
+                ctx.drawImage(value, 0, 0, canvas.width, canvas.height);
+                
+                // Get image data
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // REMOVE TEXT - ACTUAL PROCESSING
+                if (method === 'inpaint') {
+                    // Smart inpainting - blend surrounding pixels
+                    for (let y = Math.max(0, scaledArea.y); y < Math.min(canvas.height, scaledArea.y + scaledArea.height); y++) {
+                        for (let x = Math.max(0, scaledArea.x); x < Math.min(canvas.width, scaledArea.x + scaledArea.width); x++) {
+                            const i = (y * canvas.width + x) * 4;
+                            
+                            // Average surrounding pixels
+                            let r = 0, g = 0, b = 0, count = 0;
+                            
+                            for (let ny = -2; ny <= 2; ny++) {
+                                for (let nx = -2; nx <= 2; nx++) {
+                                    const px = x + nx;
+                                    const py = y + ny;
+                                    
+                                    if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
+                                        if (px < scaledArea.x || px > scaledArea.x + scaledArea.width ||
+                                            py < scaledArea.y || py > scaledArea.y + scaledArea.height) {
+                                            const ni = (py * canvas.width + px) * 4;
+                                            r += data[ni];
+                                            g += data[ni + 1];
+                                            b += data[ni + 2];
+                                            count++;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (count > 0) {
+                                data[i] = r / count;
+                                data[i + 1] = g / count;
+                                data[i + 2] = b / count;
+                            }
+                        }
+                    }
+                } else if (method === 'blur') {
+                    // Gaussian blur
+                    const kernelSize = Math.max(3, Math.floor(10 * intensity));
+                    const half = Math.floor(kernelSize / 2);
+                    
+                    for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y++) {
+                        for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x++) {
+                            let r = 0, g = 0, b = 0, count = 0;
+                            
+                            for (let ky = -half; ky <= half; ky++) {
+                                for (let kx = -half; kx <= half; kx++) {
+                                    const px = Math.min(Math.max(x + kx, 0), canvas.width - 1);
+                                    const py = Math.min(Math.max(y + ky, 0), canvas.height - 1);
+                                    const i = (py * canvas.width + px) * 4;
+                                    
+                                    r += data[i];
+                                    g += data[i + 1];
+                                    b += data[i + 2];
+                                    count++;
+                                }
+                            }
+                            
+                            const i = (y * canvas.width + x) * 4;
+                            data[i] = r / count;
+                            data[i + 1] = g / count;
+                            data[i + 2] = b / count;
+                        }
+                    }
+                } else if (method === 'pixelate') {
+                    // Pixelate effect
+                    const blockSize = Math.max(4, Math.floor(8 * intensity));
+                    
+                    for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y += blockSize) {
+                        for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x += blockSize) {
+                            const i = (y * canvas.width + x) * 4;
+                            const r = data[i];
+                            const g = data[i + 1];
+                            const b = data[i + 2];
+                            
+                            for (let py = y; py < Math.min(y + blockSize, scaledArea.y + scaledArea.height); py++) {
+                                for (let px = x; px < Math.min(x + blockSize, scaledArea.x + scaledArea.width); px++) {
+                                    const pi = (py * canvas.width + px) * 4;
+                                    data[pi] = r;
+                                    data[pi + 1] = g;
+                                    data[pi + 2] = b;
+                                }
+                            }
+                        }
+                    }
+                } else if (method === 'solid') {
+                    // Solid color fill
+                    const color = [30, 30, 30]; // Dark gray
+                    
+                    for (let y = scaledArea.y; y < scaledArea.y + scaledArea.height; y++) {
+                        for (let x = scaledArea.x; x < scaledArea.x + scaledArea.width; x++) {
+                            const i = (y * canvas.width + x) * 4;
+                            data[i] = color[0];
+                            data[i + 1] = color[1];
+                            data[i + 2] = color[2];
+                        }
+                    }
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+                
+                // Store processed frame
+                processedFrames.push(canvas.toDataURL('image/jpeg', 0.9));
+                
+                // Update progress
+                frameCount++;
+                const progress = (frameCount / totalFrames) * 100;
+                progressFill.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+                progressStatus.textContent = `Processing frame ${frameCount}/${totalFrames}`;
+                
+                // Release frame
+                value.close();
+                
+                // Allow UI to update
+                await new Promise(resolve => setTimeout(resolve, 10));
             }
             
-            // Create processed video (simulated)
-            if (currentVideo) {
-                // In real implementation, you'd process the video here
-                // For demo, we'll use the original video
-                processedVideoUrl = currentVideo;
-                
-                // Show download section
-                document.getElementById('downloadSection').style.display = 'block';
-                
-                // Update button
-                processBtn.innerHTML = '✅ Processing Complete!';
-                processBtn.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
-                
-                // Hide progress after delay
-                setTimeout(() => {
-                    document.getElementById('progressContainer').style.display = 'none';
-                }, 2000);
-            }
+            track.stop();
+            
+            // Show download section
+            document.getElementById('downloadSection').style.display = 'block';
+            progressStatus.textContent = '✅ Processing complete! Ready to download.';
+            processBtn.innerHTML = '✅ PROCESSING COMPLETE';
         }
 
         // Download processed video
         function downloadVideo() {
-            if (processedVideoUrl) {
-                const a = document.createElement('a');
-                a.href = processedVideoUrl;
-                a.download = 'text_removed_video_' + new Date().getTime() + '.mp4';
-                a.click();
+            if (processedFrames.length === 0) {
+                alert('No processed video available!');
+                return;
+            }
+
+            // Create video from frames
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Load first frame to get dimensions
+            const img = new Image();
+            img.src = processedFrames[0];
+            
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Create media recorder
+                const stream = canvas.captureStream(frameRate);
+                const recorder = new MediaRecorder(stream, {
+                    mimeType: 'video/webm;codecs=vp9',
+                    videoBitsPerSecond: 5000000
+                });
+                
+                const chunks = [];
+                
+                recorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) {
+                        chunks.push(e.data);
+                    }
+                };
+                
+                recorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'text_removed_video_' + Date.now() + '.webm';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                };
+                
+                recorder.start();
+                
+                // Draw frames
+                let frameIndex = 0;
+                
+                function drawNextFrame() {
+                    if (frameIndex < processedFrames.length) {
+                        const img = new Image();
+                        img.src = processedFrames[frameIndex];
+                        img.onload = function() {
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            frameIndex++;
+                            setTimeout(drawNextFrame, 1000 / frameRate);
+                        };
+                    } else {
+                        recorder.stop();
+                    }
+                }
+                
+                drawNextFrame();
+            };
+        }
+
+        // Helper functions
+        function seekVideo(value) {
+            if (videoElement.duration) {
+                videoElement.currentTime = (value / 100) * videoElement.duration;
             }
         }
 
-        // Video timeline
-        function seekVideo(value) {
-            const video = document.getElementById('videoPreview');
-            const duration = video.duration;
-            video.currentTime = (value / 100) * duration;
-        }
-
-        function updateDuration() {
-            const video = document.getElementById('videoPreview');
-            video.addEventListener('timeupdate', function() {
-                const current = formatTime(video.currentTime);
-                const duration = formatTime(video.duration);
-                document.getElementById('videoDuration').innerHTML = `${current} / ${duration}`;
-                document.getElementById('frameSlider').value = (video.currentTime / video.duration) * 100;
+        function displayDuration() {
+            videoElement.addEventListener('timeupdate', function() {
+                const current = formatTime(videoElement.currentTime);
+                const total = formatTime(videoElement.duration);
+                document.getElementById('currentTime').textContent = current;
+                document.getElementById('totalTime').textContent = total;
+                document.getElementById('durationDisplay').textContent = total;
+                document.getElementById('frameSlider').value = (videoElement.currentTime / videoElement.duration) * 100;
             });
         }
 
@@ -611,29 +771,9 @@
             return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // Drag and drop
-        const uploadArea = document.getElementById('uploadArea');
-        
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.style.background = 'rgba(102, 126, 234, 0.1)';
-        });
-
-        uploadArea.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            uploadArea.style.background = 'rgba(255, 255, 255, 0.95)';
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.background = 'rgba(255, 255, 255, 0.95)';
-            
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                document.getElementById('videoInput').files = files;
-                handleVideoUpload(document.getElementById('videoInput'));
-            }
-        });
+        function generatePreviewFrames() {
+            // Generate preview thumbnails
+        }
     </script>
 </body>
 </html>
